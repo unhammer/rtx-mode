@@ -1,0 +1,13 @@
+* rtx-mode
+
+Syntax highlighting support for https://wiki.apertium.org/wiki/Apertium-recursive
+
+Depends on https://github.com/unhammer/tree-sitter-langs/tree/rtx
+
+#+begin_src emacs-lisp
+(use-package rtx-mode
+  :defer t
+  :mode (("\\.rtx\\'" . rtx-mode))
+  :config
+  (add-hook 'rtx-mode-hook #'tree-sitter-mode))
+#+end_src
