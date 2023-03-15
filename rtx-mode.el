@@ -87,7 +87,7 @@ Return nil if there is no name or if NODE is not a defun node."
 
    :feature 'string
    :language 'rtx
-   '((string) @font-lock-string-face)
+   '(((string) @font-lock-string-face))
 
    :feature 'keyword
    :language 'rtx
@@ -95,6 +95,22 @@ Return nil if there is no name or if NODE is not a defun node."
       (elif_tok)
       (else_tok)
       (always_tok)] @font-lock-keyword-face)
+
+   :feature 'function
+   :language 'rtx
+   '((reduce_rule_group (ident) @font-lock-function-name-face)
+     (pattern_element (ident) @font-lock-function-name-face))
+
+   :feature 'constant
+   :language 'rtx
+   '(
+     (set_var (ident) @font-lock-type-face)
+     (source_file (attr_rule name: (ident) @font-lock-type-face))
+     (attr_set_insert (ident) @font-lock-type-face)
+     (clip attr: (ident) @font-lock-type-face)
+     (clip val: (ident) @font-lock-constant-face)
+     (reduce_output (blank) @font-lock-constant-face)
+     )
 
    :feature 'variable
    :language 'rtx
@@ -104,25 +120,10 @@ Return nil if there is no name or if NODE is not a defun node."
    ;; :feature 'operator
    ;; `([(str_op) "=" "~=" "^=" "|=" "*=" "$="] @font-lock-operator-face)
 
-   ;; TODO: these are not matched:
-   :feature 'function
-   :language 'rtx
-   '((reduce_rule_group (ident)) @font-lock-function-name-face
-     (attr_rule :name (ident)) @font-lock-function-name-face)
-
-   :feature 'function
-   :language 'rtx
-   '((ident) @font-lock-function-name-face)
-
-   ;; TODO: these are not matched
-   :feature 'constant
-   :language 'rtx
-   '((reduce_rule (string)) @font-lock-constant-face
-     (blank) @font-lock-constant-face)
 
    :feature 'weight
    :language 'rtx
-   '((weight) @font-lock-property-face)
+   '((weight) @font-lock-property-name-face)
 
    :feature 'bracket
    :language 'rtx
